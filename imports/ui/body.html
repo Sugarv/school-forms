@@ -1,0 +1,46 @@
+<template name="App_body">
+<body>
+  <div class="container">
+    
+    <div class="row">
+        <header>
+            <h1>School Forms</h1>
+            {{> loginButtons}}
+            {{> navBar}}
+        </header>
+    </div>
+    
+    <div class="row">
+      {{#if currentUser}}
+        <div id="content-container">
+          {{#if Template.subscriptionsReady}}
+            {{> Template.dynamic template=main}}
+          {{else}}
+            {{> App_loading}}
+          {{/if}}
+        </div>
+      {{/if}}
+    </div>
+    
+  </div>
+  </body>
+</template>
+
+<template name="Home">
+  <div class="row">
+    
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+    </div>
+    
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <a href="/oloimera" class="btn btn-large btn-block btn-info">Ολοήμερα</a>
+    </div>
+    
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+    </div>
+    
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <a href="/progs" class="btn btn-large btn-block btn-info">Προγράμματα (TODO)</a>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,65 @@
+<template name="Oloimera_list">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <a href="/oloimera/new" class="btn btn-sm btn-info">Προσθήκη Εγγραφής</a>
+      </div>
+    </div>
+    
+    <div class="row">
+      {{#if oloimera}}
+        <table class="table table-bordered table-striped">
+          <thead>
+            <th>Μήνας</th>
+            <th>Ενέργειες</th>
+          </thead>
+          <tbody>
+            {{#each oloimera}}
+              <tr>
+                <td>{{month}}</td>
+                <td>
+                  <a href="/oloimera/{{_id}}">Επεξεργασία</a>
+                  &nbsp;&nbsp;
+                  <a href="#" class="delete-record" id={{_id}}>Διαγραφή</a>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        Δε βρέθηκαν εγγραφές...
+      {{/if}}  
+    </div>
+
+  </div>
+</template>
+
+<template name="Oloimera_new">
+  <h3>Νέα Εγγραφή</h3>
+  {{> quickForm 
+    collection=oloimeraCol 
+    id="insertOloimera" 
+    template="bootstrap3-inline" 
+    type="method" 
+    meteormethod="oloimera.insert"
+    omitFields=hiddenFields
+    label-class="sr-only" 
+    afFieldInput-placeholder="schemaLabel"
+  }}
+</template>
+
+<template name="Oloimera_detail">
+  <h3>Επεξεργασία εγγραφής</h3>
+  {{> quickForm 
+    collection=oloimeraCol 
+    id="editOloimera" 
+    template="bootstrap3-inline" 
+    type="method-update" 
+    meteormethod="oloimera.update"
+    doc=selectedDoc
+    omitFields=hiddenFields
+    label-class="sr-only" 
+    afFieldInput-placeholder="schemaLabel"
+  }}
+</template>
