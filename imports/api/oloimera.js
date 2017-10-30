@@ -5,6 +5,13 @@ import { Tracker } from 'meteor/tracker';
 
 import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform']);
+SimpleSchema.setDefaultMessages({
+  messages: {
+    en: {
+      required: "Το πεδίο {{label}} είναι υποχρεωτικό",
+    }
+  }
+});
 
 export const Oloimera = new Mongo.Collection('oloimera');
 

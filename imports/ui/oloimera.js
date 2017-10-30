@@ -14,12 +14,6 @@ Template.Oloimera_list.onCreated(function oloimeraOnCreated() {
 
 Template.Oloimera_list.helpers({
   oloimera() {
-    /*const instance = Template.instance();
-    if (instance.state.get('hideCompleted')) {
-      // If hide completed is checked, filter tasks
-      return Tasks.find({ checked: { $ne: true } }, { sort: { createdAt: -1 } });
-    }*/
-    // Otherwise, return all of the tasks
     return Oloimera.find({});
   },
 });
@@ -55,7 +49,7 @@ Template.Oloimera_new.onCreated(function() {
          FlowRouter.go('Oloimera.detail', {id: success});
       } 
     });
-    console.log(newRecord);
+    //console.log(newRecord);
   }
   
 });

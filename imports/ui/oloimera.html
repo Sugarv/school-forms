@@ -1,32 +1,37 @@
 <template name="Oloimera_list">
-  <div class="container">
-    
+  <div class="container-fluid">
+      <ol class="breadcrumb">
+        <li><a href="/">Αρχική</a></li>
+        <li class="active">Ολοήμερα</li>
+      </ol>
     <div class="row">
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <a href="/oloimera/new" class="btn btn-sm btn-info">Προσθήκη Εγγραφής</a>
+        <a href="/oloimera/new" class="btn btn-sm btn-info" style="margin-bottom: 5px;">Προσθήκη Εγγραφής</a>
       </div>
     </div>
     
     <div class="row">
       {{#if oloimera}}
-        <table class="table table-bordered table-striped">
-          <thead>
-            <th>Μήνας</th>
-            <th>Ενέργειες</th>
-          </thead>
-          <tbody>
-            {{#each oloimera}}
-              <tr>
-                <td>{{month}}</td>
-                <td>
-                  <a href="/oloimera/{{_id}}">Επεξεργασία</a>
-                  &nbsp;&nbsp;
-                  <a href="#" class="delete-record" id={{_id}}>Διαγραφή</a>
-                </td>
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <th>Μήνας</th>
+              <th>Ενέργειες</th>
+            </thead>
+            <tbody>
+              {{#each oloimera}}
+                <tr>
+                  <td>{{month}}</td>
+                  <td>
+                    <a href="/oloimera/{{_id}}">Επεξεργασία</a>
+                    &nbsp;&nbsp;
+                    <a href="#" class="delete-record" id={{_id}}>Διαγραφή</a>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
       {{else}}
         Δε βρέθηκαν εγγραφές...
       {{/if}}  
@@ -36,6 +41,11 @@
 </template>
 
 <template name="Oloimera_new">
+  <ol class="breadcrumb">
+      <li><a href="/">Αρχική</a></li>
+      <li><a href="/oloimera">Ολοήμερα</a></li>
+      <li class="active">Προσθήκη</li>
+  </ol>
   <h3>Νέα Εγγραφή</h3>
   {{> quickForm 
     collection=oloimeraCol 
@@ -46,10 +56,16 @@
     omitFields=hiddenFields
     label-class="sr-only" 
     afFieldInput-placeholder="schemaLabel"
+    buttonContent="Υποβολή"
   }}
 </template>
 
 <template name="Oloimera_detail">
+  <ol class="breadcrumb">
+      <li><a href="/">Αρχική</a></li>
+      <li><a href="/oloimera">Ολοήμερα</a></li>
+      <li class="active">Επεξεργασία</li>
+  </ol>
   <h3>Επεξεργασία εγγραφής</h3>
   {{> quickForm 
     collection=oloimeraCol 
@@ -61,5 +77,6 @@
     omitFields=hiddenFields
     label-class="sr-only" 
     afFieldInput-placeholder="schemaLabel"
+    buttonContent="Υποβολή"
   }}
 </template>

@@ -28,3 +28,7 @@ kadira:flow-router
 kadira:blaze-layout
 aldeed:collection2-core
 aldeed:autoform
+alanning:roles
+useraccounts:bootstrap
+useraccounts:flow-routing
+softwarerero:accounts-t9n
