@@ -9,19 +9,36 @@ import '../ui/body.js';
 // Import to override accounts templates
 //import '../../ui/accounts/accounts-templates.js';
 
-FlowRouter.route('/oloimera', {
+
+privateRoutes = FlowRouter.group({
+  triggersEnter: [function(context, redirect, stop){
+    if (!Meteor.userId()){
+      redirect('/');
+    }
+  }]
+});
+
+publicRoutes = FlowRouter.group({});
+
+publicRoutes.route('/', {
+  name: 'App.home',
+  action() {
+    BlazeLayout.render('App_body', { main: 'Home' });
+  },
+});
+privateRoutes.route('/oloimera', {
   name: 'Oloimera.list',
   action() {
     BlazeLayout.render('App_body', { main: 'Oloimera_list' });
   },
 });
-FlowRouter.route('/oloimera/new', {
+privateRoutes.route('/oloimera/new', {
   name: 'Oloimera.new',
   action() {
     BlazeLayout.render('App_body', { main: 'Oloimera_new' });
   },
 });
-FlowRouter.route('/oloimera/:id', {
+privateRoutes.route('/oloimera/:id', {
   name: 'Oloimera.detail',
   action() {
     BlazeLayout.render('App_body', { main: 'Oloimera_detail' });
@@ -29,10 +46,16 @@ FlowRouter.route('/oloimera/:id', {
 });
 
 
-FlowRouter.route('/', {
-  name: 'App.home',
+privateRoutes.route('/admin', {
+  name: 'Admin_route',
   action() {
-    BlazeLayout.render('App_body', { main: 'Home' });
+    BlazeLayout.render('App_body', { main: 'Admin_Home' });
+  },
+});
+privateRoutes.route('/admin/oloimera/', {
+  name: 'Oloimera_Admin_route',
+  action() {
+    BlazeLayout.render('App_body', { main: 'Oloimera_Admin' });
   },
 });
 

@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 import { Tracker } from 'meteor/tracker';
+import { Roles } from 'meteor/alanning:roles';
+
 
 import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform']);
@@ -31,14 +33,18 @@ const months = [
 
 if (Meteor.isServer) {
   // This code only runs on the server
-  // Only publish records that belong to the current user
+  // Only publish records that belong to the current user or everything to admin
   Meteor.publish('oloimera.user', function schoolsPublication() {
-    return Oloimera.find({schoolId: Meteor.userId()});
+    return Roles.userIsInRole( Meteor.userId(), 'admin' ) ?
+      Oloimera.find({}) : 
+      Oloimera.find({schoolId: Meteor.userId()}) ;
   });
   // Publish all records to the admin
-  Meteor.publish('oloimera.admin', function schoolsPublication() {
+  Meteor.publish('users.all', function userPublication() {
     // check if admin
-    return Oloimera.find({});
+    return Roles.userIsInRole( Meteor.userId(), 'admin' ) ?
+      Meteor.users.find({}) : 
+      [];
   });
 }
 
@@ -112,6 +118,18 @@ const oloimeraSchema = new SimpleSchema({
 
 Oloimera.attachSchema(oloimeraSchema);
 
+
+// Collection helpers to return school name for oloimero record
+Oloimera.helpers({
+  schoolName() {
+    let email = Meteor.users.findOne(this.schoolId) && Meteor.users.findOne(this.schoolId).emails[0].address;
+    return email ? 
+      email :
+      'Άγνωστο';
+  }
+});
+
+
 Meteor.methods({
   'oloimera.insert'(rec) {
     // Make sure the user is logged in before inserting a record
@@ -139,8 +157,9 @@ Meteor.methods({
     if (! this.userId) {
       throw new Meteor.Error('not-authorized');
     }
+    // ensure user owns the record or is admin before deleting
     const theRecord = Oloimera.findOne({_id: id});
-    if (theRecord.schoolId === this.userId)
+    if (theRecord.schoolId === this.userId || Roles.userIsInRole( Meteor.userId(), 'admin' ))
       return Oloimera.remove({_id: id});
     throw new Meteor.Error('not-authorized');
   }

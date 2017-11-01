@@ -80,3 +80,27 @@
     buttonContent="Υποβολή"
   }}
 </template>
+
+<template name="Oloimera_Admin">
+  {{#if isInRole 'admin'}}
+    
+    <div class="container">
+      
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h3>Ολοήμερα</h3>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            {{> reactiveTable settings=rtSettings}}
+        </div>
+      </div>
+      
+    </div>
+    
+  {{else}}
+    forbidden
+  {{/if}}
+</template>
