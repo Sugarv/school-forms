@@ -58,6 +58,13 @@ privateRoutes.route('/admin/oloimera/', {
     BlazeLayout.render('App_body', { main: 'Oloimera_Admin' });
   },
 });
+privateRoutes.route('/admin/upload/', {
+  name: 'Admin_upload_route',
+  action() {
+    BlazeLayout.render('App_body', { main: 'uploadUsers' });
+  },
+});
+
 
 // the App_notFound template is used for unknown routes and missing lists
 /*FlowRouter.notFound = {

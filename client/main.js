@@ -3,6 +3,7 @@ import '../imports/startup/routes.js';
 import '../imports/ui/navbar.js';
 import '../imports/ui/body.js';
 import '../imports/ui/oloimera.js';
+import '../imports/ui/admin.js';
 
 // Helper object for period months
 recordMonths = {

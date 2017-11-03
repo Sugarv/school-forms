@@ -17,10 +17,6 @@ const afterLogin = function(error, state){
   }
 }
 
-/*Accounts.ui.config({
-  passwordSignupFields: 'USERNAME_ONLY',
-});*/
-
 // Set language for AutoForm
 T9n.setLanguage("el");
 // Set language for Reactive Table

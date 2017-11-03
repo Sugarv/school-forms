@@ -39,13 +39,6 @@ if (Meteor.isServer) {
       Oloimera.find({}) : 
       Oloimera.find({schoolId: Meteor.userId()}) ;
   });
-  // Publish all records to the admin
-  Meteor.publish('users.all', function userPublication() {
-    // check if admin
-    return Roles.userIsInRole( Meteor.userId(), 'admin' ) ?
-      Meteor.users.find({}) : 
-      [];
-  });
 }
 
 const oloimeraSchema = new SimpleSchema({

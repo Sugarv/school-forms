@@ -1,0 +1,28 @@
+<template name="uploadUsers">
+   {{#if isInRole 'admin'}}
+  <div class="container-fluid">
+      <ol class="breadcrumb">
+            <li><a href="/admin">Αρχική</a></li>
+            <li class="active">Εισαγωγή Χρήστών</li>
+      </ol>
+      
+      <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h4 class="page-header">Ανεβάστε ένα αρχείο CSV</h4>
+         </div>
+      </div>
+      
+      <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            {{#unless uploading}}
+               <input type="file" name="uploadCSV">
+            {{else}}
+              <p><i class="fa fa-spin fa-refresh"></i> Ανέβασμα σε εξέλιξη...</p>
+            {{/unless}}
+         </div>
+      </div>
+  </div>
+  {{else}}
+   Απαγορεύεται η πρόσβαση!
+  {{/if}}
+</template>
