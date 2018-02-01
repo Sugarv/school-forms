@@ -45,7 +45,7 @@ privateRoutes.route('/oloimera/:id', {
   },
 });
 
-
+// admin routes
 privateRoutes.route('/admin', {
   name: 'Admin_route',
   action() {
@@ -56,6 +56,24 @@ privateRoutes.route('/admin/oloimera/', {
   name: 'Oloimera_Admin_route',
   action() {
     BlazeLayout.render('App_body', { main: 'Oloimera_Admin' });
+  },
+});
+privateRoutes.route('/admin/oloimera-months/', {
+  name: 'Oloimera_Admin_months',
+  action() {
+    BlazeLayout.render('App_body', { main: 'Oloimera_Admin_months' });
+  },
+});
+privateRoutes.route('/admin/oloimera/month/:id', {
+  name: 'Oloimera_Admin_month',
+  action() {
+    BlazeLayout.render('App_body', { main: 'Oloimera_Admin_month' });
+  },
+});
+privateRoutes.route('/admin/oloimera/school/:id', {
+  name: 'Oloimera_Admin_school',
+  action() {
+    BlazeLayout.render('App_body', { main: 'Oloimera_Admin_school' });
   },
 });
 privateRoutes.route('/admin/upload/', {

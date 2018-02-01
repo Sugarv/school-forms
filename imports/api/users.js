@@ -12,6 +12,18 @@ if (Meteor.isServer) {
       Meteor.users.find({}) : 
       [];
   });
+  Meteor.publish('users.usernames', function userPublication() {
+    // check if admin
+    return Roles.userIsInRole( Meteor.userId(), 'admin' ) ?
+      Meteor.users.find({}, {fields: {username:1}} ) : 
+      [];
+  });
+  Meteor.publish('users.single', function singleUserPublication(id) {
+    // check if admin
+    return Roles.userIsInRole( Meteor.userId(), 'admin' ) ?
+      Meteor.users.find({_id: id}) : 
+      [];
+  });
 }
 
 

@@ -30,6 +30,7 @@ const months = [
   'Μάιος',
   'Ιούνιος'
 ];
+export const monthNames = months;
 
 if (Meteor.isServer) {
   // This code only runs on the server
@@ -38,6 +39,16 @@ if (Meteor.isServer) {
     return Roles.userIsInRole( Meteor.userId(), 'admin' ) ?
       Oloimera.find({}) : 
       Oloimera.find({schoolId: Meteor.userId()}) ;
+  });
+  Meteor.publish('oloimera.month', function oloimeraMonth(id) {
+    let monthAA = parseInt(id)+1;
+    return Roles.userIsInRole( Meteor.userId(), 'admin' ) ? 
+      Oloimera.find({monthaa: monthAA}) :
+      [];
+  });
+  Meteor.publish('oloimera.singleMonth', function oloimeraSingleMonth(sId,mId) {
+    let monthAA = parseInt(mId)+1;
+    return Oloimera.find({schoolId: sId, monthaa: monthAA});
   });
 }
 

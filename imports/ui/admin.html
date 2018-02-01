@@ -26,3 +26,212 @@
    Απαγορεύεται η πρόσβαση!
   {{/if}}
 </template>
+
+
+<template name="Oloimera_Admin">
+    {{#if isInRole 'admin'}}
+      
+      <div class="container">
+        <ol class="breadcrumb">
+          <li><a href="/admin">Αρχική</a></li>
+          <li class="active">Ολοήμερα</li>
+        </ol>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h3>Ολοήμερα</h3>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          </div>
+          
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <a href="/admin/oloimera-months" class="btn btn-large btn-block btn-info">Ανά Μήνα</a>
+          </div>
+          
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+          </div>
+          
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <a href="/admin/oloimera-schools" class="btn btn-large btn-block btn-info">Ανά Σχολείο</a>
+          </div>
+        </div>
+        
+      </div>
+      
+    {{else}}
+      forbidden
+    {{/if}}
+  </template>
+  
+  <template name="Oloimera_Admin_months">
+      <div class="container">
+          <ol class="breadcrumb">
+            <li><a href="/admin">Αρχική</a></li>
+            <li><a href="/admin/oloimera">Ολοήμερα</a></li>
+            <li class="active">Ανά μήνα</li>
+          </ol>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <h3>Ολοήμερα</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Μήνας</th>
+                    <th>Σχολεία</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each monthRow}}
+                    <tr>
+                      <td><a href="/admin/oloimera/month/{{monInd}}">{{monName}}</a></td>
+                      <td>{{monSch}}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+  </template>
+
+  <template name="Oloimera_Admin_old">
+    {{#if isInRole 'admin'}}
+      
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h3>Ολοήμερα</h3>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Μήνας</th>
+                  <th>Σχολεία</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each monthRow}}
+                  <tr>
+                    <td><a href="/admin/oloimera/month/{{monInd}}">{{monName}}</a></td>
+                    <td>{{monSch}}</td>
+                  </tr>
+                {{/each}}
+  
+              </tbody>
+            </table>
+  
+          </div>
+        </div>
+        
+      </div>
+      
+    {{else}}
+      forbidden
+    {{/if}}
+  </template>
+  
+  <template name="Oloimera_Admin_month">
+      <div class="container">
+          <ol class="breadcrumb">
+            <li><a href="/admin">Αρχική</a></li>
+            <li><a href="/admin/oloimera">Ολοήμερα</a></li>
+            <li><a href="/admin/oloimera-months">Ανά μήνα</a></li>
+            <li class="active">{{curMonth}}</li>
+          </ol>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <h3>Ολοήμερα: {{curMonth}}</h3>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Σχολείο</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each monthSchools}}
+                    <tr>
+                      <td><a href="/admin/oloimera/school/{{schId}}?month={{monId}}">{{schName}}</a></td>
+                    </tr>
+                  {{/each}}
+    
+                </tbody>
+              </table>
+    
+            </div>
+          </div>
+          
+        </div>
+  </template>
+  
+  <template name="Oloimera_Admin_school">
+      <div class="container">
+          <ol class="breadcrumb">
+            <li><a href="/admin">Αρχική</a></li>
+            <li><a href="/admin/oloimera">Ολοήμερα</a></li>
+            <li><a href="/admin/oloimera-schools">Ανά Σχολείο</a></li>
+            <li class="active">{{schName}}</li>
+          </ol>
+          {{#with theRecord}}
+          <div class="row">
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <h3>Σχολείο: {{schName}}</h3>
+              <h4>Μήνας: {{month}}</h4>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              {{#if students}}
+              <p>Πλήθος μαθητών: {{studentCount}}</p>
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Ον/μο</th>
+                    <th>Πατρώνυμο</th>
+                    <th>Τάξη</th>
+                    <th>Τύπος</th>
+                    <th>Αποχώρηση</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each students}}
+                  <tr>
+                    <td>{{surname}} {{name}}</td>
+                    <td>{{father}}</td>
+                    <td>{{class}}</td>
+                    <td>{{type}}</td>
+                    <td>{{leave}}</td>
+                  </tr>
+                  {{/each}}
+    
+                </tbody>
+              </table>
+              {{else}}
+                <h3>No students!</h3>
+              {{/if}}
+    
+            </div>
+          </div>
+          {{/with}}
+          
+        </div>
+  </template>
