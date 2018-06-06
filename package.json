@@ -5,10 +5,12 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.49",
     "babel-runtime": "^6.26.0",
     "bcrypt": "^1.0.3",
     "meteor-node-stubs": "~0.2.0",
     "papaparse": "^4.3.6",
-    "simpl-schema": "^0.3.2"
+    "simpl-schema": "^0.3.2",
+    "hoek": "^4.2.1"
   }
 }
